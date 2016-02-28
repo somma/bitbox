@@ -539,3 +539,176 @@ std::wstring ltrimw(std::wstring& s, const std::wstring& drop)
 }
 
 
+
+/**
+ * @brief	ASCII(Multibyte) --> WIDE CHAR 로 변환, caller 는 리턴되는 포인터를 소멸시켜주어야 함
+ * @param	
+ * @see		
+ * @remarks	
+ * @code		
+ * @endcode	
+ * @return	
+**/
+wchar_t* MbsToWcs(_In_ const char* mbs)
+{
+    _ASSERTE(NULL!=mbs);
+    if(NULL==mbs) return NULL;
+
+    int outLen=MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, mbs, -1, NULL, 0);
+    if(0==outLen) return NULL;
+
+    wchar_t* outWchar=(wchar_t*) malloc(outLen * (sizeof(wchar_t)));  // outLen contains NULL char 
+    if(NULL==outWchar) return NULL;
+    RtlZeroMemory(outWchar, outLen);
+
+    if(0==MultiByteToWideChar(CP_ACP, MB_PRECOMPOSED, mbs, -1, outWchar, outLen))
+    {
+        log_err "MultiByteToWideChar() failed, errcode=0x%08x", GetLastError() log_end
+
+        free(outWchar);
+        return NULL;
+    }
+
+    return outWchar;
+}
+
+/**
+ * @brief	WIDE CHAR --> ASCII(Multibyte) 로 변환, caller 는 리턴되는 포인터를 소멸시켜주어야 함
+ * @param	
+ * @see		
+ * @remarks	
+ * @code		
+ * @endcode	
+ * @return	
+**/
+char* WcsToMbs(_In_ const wchar_t* wcs)
+{
+    _ASSERTE(NULL!=wcs);
+    if(NULL==wcs) return NULL;
+
+    int outLen=WideCharToMultiByte(CP_ACP, 0, wcs, -1, NULL, 0, NULL, NULL);
+    if(0==outLen) return NULL;
+
+    char* outChar=(char*) malloc(outLen * sizeof(char));
+    if(NULL==outChar) return NULL;
+    RtlZeroMemory(outChar, outLen);
+
+    if(0==WideCharToMultiByte(CP_ACP, 0, wcs, -1, outChar, outLen, NULL, NULL))
+    {
+        log_err "WideCharToMultiByte() failed, errcode=0x%08x", GetLastError() log_end
+        free(outChar);
+        return NULL;
+    }
+
+    return outChar;
+}
+    
+/**
+ * @brief	wide char -> utf8 변환, caller 는 리턴되는 포인터를 소멸시켜주어야 함 
+ * @param	
+ * @see		
+ * @remarks	
+ * @code		
+ * @endcode	
+ * @return	
+**/
+char* WcsToMbsUTF8(_In_ const wchar_t* wcs)
+{
+    _ASSERTE(NULL!=wcs);
+    if(NULL==wcs) return NULL;
+
+    int outLen=WideCharToMultiByte(CP_UTF8, 0, wcs, -1, NULL, 0, NULL, NULL);
+    if(0==outLen) return NULL;
+
+    char* outChar=(char*) malloc(outLen * sizeof(char));
+    if(NULL==outChar) return NULL;
+    RtlZeroMemory(outChar, outLen);
+
+    if(0==WideCharToMultiByte(CP_UTF8, 0, wcs, -1, outChar, outLen, NULL, NULL))
+    {
+        log_err "WideCharToMultiByte() failed, errcode=0x%08x", GetLastError() log_end
+
+        free(outChar);
+        return NULL;
+    }
+
+    return outChar;
+}
+
+/**
+ * @brief	
+ * @param	
+ * @see		
+ * @remarks	
+ * @code		
+ * @endcode	
+ * @return	
+**/
+wchar_t* Utf8MbsToWcs(_In_ const char* utf8)
+{
+    _ASSERTE(NULL!=utf8);
+    if(NULL==utf8) return NULL;
+
+    int outLen=MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, utf8, -1, NULL, 0);
+    if(0==outLen) return NULL;
+
+    wchar_t* outWchar=(wchar_t*) malloc(outLen * (sizeof(wchar_t)));  // outLen contains NULL char 
+    if(NULL==outWchar) return NULL;
+    RtlZeroMemory(outWchar, outLen);
+
+    if(0==MultiByteToWideChar(CP_UTF8, MB_ERR_INVALID_CHARS, utf8, -1, outWchar, outLen))
+    {
+        log_err "MultiByteToWideChar() failed, errcode=0x%08x", GetLastError() log_end
+
+        free(outWchar);
+        return NULL;
+    }
+
+    return outWchar;
+}
+
+/**
+* @brief	
+* @param	
+* @see		
+* @remarks	
+* @code		
+* @endcode	
+* @return	
+*/
+std::wstring MbsToWcsEx(_In_ const char *mbs)
+{
+    wchar_t* tmp = MbsToWcs(mbs);
+    if (NULL == tmp)
+    {
+        return _null_stringw;
+    }
+    else
+    {
+        SafePtr ptr((void*)tmp);
+        return std::wstring(tmp);
+    }
+}
+
+/**
+* @brief	
+* @param	
+* @see		
+* @remarks	
+* @code		
+* @endcode	
+* @return	
+*/
+std::string WcsToMbsEx(_In_ const wchar_t *wcs)
+{
+    char* tmp = WcsToMbs(wcs);
+    if (NULL == tmp)
+    {
+        return _null_stringa;
+    }
+    else
+    {
+        SafePtr ptr((void*)tmp);
+        return std::string(tmp);
+    }
+}

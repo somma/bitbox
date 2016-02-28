@@ -42,6 +42,12 @@
     <ClInclude Include="jsoncpp\json\json-forwards.h">
       <Filter>jsoncpp\json</Filter>
     </ClInclude>
+    <ClInclude Include="reg_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="RegistryUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -61,6 +67,9 @@
     </ClCompile>
     <ClCompile Include="jsoncpp\jsoncpp.cpp">
       <Filter>jsoncpp</Filter>
+    </ClCompile>
+    <ClCompile Include="RegistryUtil.cpp">
+      <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
