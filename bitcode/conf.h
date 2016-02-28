@@ -45,7 +45,7 @@ typedef class BCConf
 {
 public:
     bool load_config(_In_ const wchar_t* config_path);
-private:
+
     std::list<std::string>      _file_names;
     std::list<RegInfo>          _regs;
     std::list<std::string>      _svcs;

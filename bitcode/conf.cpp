@@ -57,7 +57,7 @@ bool BCConf::load_config(const wchar_t * config_path)
         _svcs.push_back(svc_name.asString());
     }
 
-
+    /*
     for (auto file_name : _file_names)
     {
         log_info "file name = %s", file_name.c_str() log_end;
@@ -69,7 +69,7 @@ bool BCConf::load_config(const wchar_t * config_path)
     for (auto reg : _regs)
     {
         reg.dump();
-    }
+    }*/
 
     return true;
 }

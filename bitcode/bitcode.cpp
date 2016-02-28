@@ -10,6 +10,7 @@
 #include "log.h"
 #include "conf.h"
 #include "util.h"
+#include "reg_engine.h"
 
 /// @brief entry point
 int main()
@@ -19,7 +20,16 @@ int main()
     BCConf _conf;
     _conf.load_config(L"z:\\work.bob\\bob4-3-antivm\\bitbox\\bitcode\\bitcode.conf");
 
-
+    // check registries
+    BCReg _reg_engine;
+    for (auto reg_info : _conf._regs)
+    {
+        if (true == _reg_engine.is_exists(reg_info))
+        {
+            log_info "[found]" log_end;
+            reg_info.dump();
+        }
+    }
 
     log_info "press any key to terminate..." log_end;
     _pause;

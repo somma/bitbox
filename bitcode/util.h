@@ -1,10 +1,41 @@
 #pragma once
 
+#ifndef _TODO_DEFINED_
+#define LINE1(x)	#x
+#define LINE(x)		LINE1(x)
+#define TODO(msg)	message(  __FILE__"(" LINE(__LINE__) ") [TODO] " msg )
+#define todo TODO
+#endif
+
+#define free_and_nil(p)     do { if (NULL != p) { free(p); p = NULL;} } while(p != NULL);
+
 #define     _pause  _getch()
 
 
+
+
+wchar_t* MbsToWcs(_In_ const char* mbs);
+char* WcsToMbs(_In_ const wchar_t* wcs);
+char* WcsToMbsUTF8(_In_ const wchar_t* wcs);
+wchar_t* Utf8MbsToWcs(_In_ const char* utf8);
+
 static const std::wstring _null_stringw(L"");
 static const std::string  _null_stringa("");
+
+
+class SafePtr
+{
+public:
+    SafePtr(void* ptr) : _ptr(ptr) {}
+    ~SafePtr() { free_and_nil(_ptr); }
+    void* get() { return _ptr; };
+private:
+    void* _ptr;
+};
+std::wstring MbsToWcsEx(_In_ const char *mbs);
+std::string WcsToMbsEx(_In_ const wchar_t *wcs);
+
+
 
 #define wtc_none    0
 #define wtc_red     1
