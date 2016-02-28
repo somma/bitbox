@@ -13,9 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <Filter Include="jsoncpp">
+      <UniqueIdentifier>{e528b5b9-96cf-4f72-b84d-c21aa2b2db42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="jsoncpp\json">
+      <UniqueIdentifier>{0d0f990c-33fb-4efd-a84c-767fa2112dca}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="stdafx.h">
@@ -29,6 +32,15 @@
     </ClInclude>
     <ClInclude Include="util.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="conf.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json\json.h">
+      <Filter>jsoncpp\json</Filter>
+    </ClInclude>
+    <ClInclude Include="jsoncpp\json\json-forwards.h">
+      <Filter>jsoncpp\json</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -44,5 +56,14 @@
     <ClCompile Include="util.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="conf.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="jsoncpp\jsoncpp.cpp">
+      <Filter>jsoncpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="bitcode.conf" />
   </ItemGroup>
 </Project>

@@ -1,8 +1,10 @@
 #pragma once
 
+#define     _pause  _getch()
+
+
 static const std::wstring _null_stringw(L"");
 static const std::string  _null_stringa("");
-
 
 #define wtc_none    0
 #define wtc_red     1
