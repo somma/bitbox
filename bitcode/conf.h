@@ -16,7 +16,10 @@
 typedef class RegInfo
 {
 public:
-    RegInfo(_In_ std::string& root_key, _In_ std::string& key_name, _In_ std::string& val_name, _In_ std::string& val_data)
+    RegInfo(_In_ const char* root_key, 
+            _In_ const char* key_name,
+            _In_ const char* val_name,
+            _In_ const char* val_data)
         : _root_key(root_key),
         _key_name(key_name),
         _val_name(val_name),
@@ -48,6 +51,6 @@ public:
 
     std::list<std::string>      _file_names;
     std::list<RegInfo>          _regs;
-    std::list<std::string>      _svcs;
+    std::list<std::string>      _svc_names;
 
 } *PBCConf;

@@ -42,10 +42,10 @@ bool BCConf::load_config(const wchar_t * config_path)
     for (auto reg_key : reg_keys)
     {
         RegInfo ri(
-            reg_key["root_key"].asString(),
-            reg_key["key_name"].asString(),
-            reg_key["val_name"].asString(),
-            reg_key["val_data"].asString());
+            reg_key["root_key"].asString().c_str(),
+            reg_key["key_name"].asString().c_str(),
+            reg_key["val_name"].asString().c_str(),
+            reg_key["val_data"].asString().c_str());
         _regs.push_back(ri);
     }
 
@@ -54,7 +54,7 @@ bool BCConf::load_config(const wchar_t * config_path)
     Json::Value svc_names = conf["svc_name"];
     for (auto svc_name : svc_names)
     {
-        _svcs.push_back(svc_name.asString());
+        _svc_names.push_back(svc_name.asString());
     }
 
     /*

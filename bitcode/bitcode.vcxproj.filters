@@ -48,6 +48,12 @@
     <ClInclude Include="RegistryUtil.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="file_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="svc_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
