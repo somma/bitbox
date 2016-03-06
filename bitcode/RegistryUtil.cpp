@@ -240,7 +240,7 @@ RUReadString(
     HKEY sub_key_handle = RUOpenKey(RootKey, SubKey, true);
     if (NULL == sub_key_handle)
     {
-        log_err "RUOpenKey(%ws) failed", SubKey log_end
+        //log_err "RUOpenKey(%ws) failed", SubKey log_end
         return false;
     }
 
