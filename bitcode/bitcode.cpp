@@ -13,7 +13,7 @@
 #include "reg_engine.h"
 #include "file_engine.h"
 #include "svc_engine.h"
-
+#include "proc_engine.h"
 
 /// @brief entry point
 int main()
@@ -26,9 +26,17 @@ int main()
     BCReg _reg_engine;
     BCFile _file_engine;
     BCSvc _svc_engine;
+    BCProcs _proc_engine;
+    
     if (true != _svc_engine.initialize())
     {
         log_err "BCSvc::initialize() failed." log_end;
+        return -1;
+    }
+
+    if (true != _proc_engine.initialize())
+    {
+        log_err "BCProc::initialize() failed." log_end;
         return -1;
     }
 
@@ -57,6 +65,15 @@ int main()
         if (true == _svc_engine.is_svc_exists(svc_name.c_str()))
         {
             log_info "[found] service = %s", svc_name.c_str() log_end;
+        }
+    }
+
+    // process check
+    for (auto proc_name : _conf._proc_names)
+    {
+        if (true == _proc_engine.is_process_exists(proc_name.c_str()))
+        {
+            log_info "[found] process = %s is running", proc_name.c_str() log_end;
         }
     }
 

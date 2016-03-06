@@ -52,5 +52,6 @@ public:
     std::list<std::string>      _file_names;
     std::list<RegInfo>          _regs;
     std::list<std::string>      _svc_names;
+    std::list<std::string>      _proc_names;
 
 } *PBCConf;

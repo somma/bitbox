@@ -49,13 +49,20 @@ bool BCConf::load_config(const wchar_t * config_path)
         _regs.push_back(ri);
     }
 
-
     // read service
     Json::Value svc_names = conf["svc_name"];
     for (auto svc_name : svc_names)
     {
         _svc_names.push_back(svc_name.asString());
     }
+
+    // read process names
+    Json::Value proc_names = conf["process_name"];
+    for (auto proc_name : proc_names)
+    {
+        _proc_names.push_back(proc_name.asString());
+    }
+
 
     /*
     for (auto file_name : _file_names)

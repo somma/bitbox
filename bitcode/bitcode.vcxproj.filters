@@ -54,6 +54,12 @@
     <ClInclude Include="svc_engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="proc_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="process_tree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -75,6 +81,9 @@
       <Filter>jsoncpp</Filter>
     </ClCompile>
     <ClCompile Include="RegistryUtil.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="process_tree.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

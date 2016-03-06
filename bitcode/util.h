@@ -110,3 +110,4 @@ std::wstring rtrimw(std::wstring& s, const std::wstring& drop);
 std::wstring ltrimw(std::wstring& s, const std::wstring& drop);
 
 
+bool set_privilege(_In_z_ const wchar_t* privilege, _In_ bool enable);
