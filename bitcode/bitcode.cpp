@@ -14,6 +14,8 @@
 #include "file_engine.h"
 #include "svc_engine.h"
 #include "proc_engine.h"
+#include "wmi_engine.h"
+
 
 /// @brief entry point
 int main()

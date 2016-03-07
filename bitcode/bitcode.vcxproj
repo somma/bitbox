@@ -163,6 +163,7 @@
     <ClInclude Include="svc_engine.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="util.h" />
+    <ClInclude Include="wmi_engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitcode.cpp" />
