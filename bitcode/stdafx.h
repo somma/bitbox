@@ -3,6 +3,7 @@
 #include "targetver.h"
 
 #include <stdio.h>
+#include <stdarg.h>
 #include <tchar.h>
 #include <conio.h>
 

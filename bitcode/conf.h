@@ -11,6 +11,7 @@
 #include <sal.h>
 #include <string>
 #include <list>
+#include <map>
 #include "log.h"
 
 typedef class RegInfo
@@ -35,7 +36,7 @@ public:
     void dump()
     {
         log_info 
-            "root key = %s, key_name = %s, val_name = %s, val_data = %s", 
+            "[Detected] = Root_Key : %s, Sub_Key : %s, Val_Name : %s, Val_Data : %s", 
             _root_key.c_str(),
             _key_name.c_str(),
             _val_name.c_str(),
@@ -44,14 +45,35 @@ public:
     }
 } *PRegInfo;
 
+typedef enum BCEngines
+{
+	FILE_ENGINE,
+	PROC_ENGINE,
+	SVC_ENGINE,
+	REG_ENGINE
+} *PBCEngines;
+
 typedef class BCConf
 {
 public:
     bool load_config(_In_ const wchar_t* config_path);
 
+	std::list<RegInfo>			_regs;
+	std::map<BCEngines, std::list<std::string>> _conf_value;
+
+private:
     std::list<std::string>      _file_names;
-    std::list<RegInfo>          _regs;
     std::list<std::string>      _svc_names;
     std::list<std::string>      _proc_names;
 
 } *PBCConf;
+
+
+typedef class IBCConf
+{
+public:
+	virtual bool initialize() = 0;
+	virtual void finalize() = 0;
+	virtual BCEngines get_engine_value() = 0;
+	virtual bool is_exists(const char* values, ...) = 0;
+} *IPBCConf;

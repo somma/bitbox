@@ -54,7 +54,7 @@ RUOpenKey(
     DWORD ret = RegOpenKeyExW(RootKey, SubKey, 0, sam, &hSubKey);
     if (ERROR_SUCCESS != ret)
     {
-        log_err "RegOpenKeyExW(%ws) failed, ret = %u", SubKey, ret log_end        
+        //log_err "RegOpenKeyExW(%ws) failed, ret = %u", SubKey, ret log_end        
         return NULL;
     }
 
@@ -115,7 +115,7 @@ RUCreateKey(
     ret = RegCreateKeyExW(RootKey, SubKey, 0, NULL, 0, sam, NULL, &sub_key_handle, &disposition);
     if (ERROR_SUCCESS != ret)
     {
-        log_err "RegCreateKeyExW(%ws) failed, ret = %u", SubKey, ret log_end        
+        //log_err "RegCreateKeyExW(%ws) failed, ret = %u", SubKey, ret log_end        
         return NULL;
     }
     else

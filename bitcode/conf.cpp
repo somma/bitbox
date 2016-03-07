@@ -16,7 +16,11 @@
 bool BCConf::load_config(const wchar_t * config_path)
 {
     _ASSERTE(NULL != config_path);
-    if (NULL == config_path) return false;
+	if (NULL == config_path)
+	{
+		log_err "not found file : %ws", config_path log_end;
+		return false;
+	}
 
     std::ifstream js;
     js.open(config_path, std::ifstream::in);
@@ -63,20 +67,9 @@ bool BCConf::load_config(const wchar_t * config_path)
         _proc_names.push_back(proc_name.asString());
     }
 
-
-    /*
-    for (auto file_name : _file_names)
-    {
-        log_info "file name = %s", file_name.c_str() log_end;
-    }
-    for (auto svc_name : _svcs)
-    {
-        log_info "svc name = %s", svc_name.c_str() log_end;
-    }
-    for (auto reg : _regs)
-    {
-        reg.dump();
-    }*/
+	_conf_value[FILE_ENGINE] = _file_names;
+	_conf_value[SVC_ENGINE] = _svc_names;
+	_conf_value[PROC_ENGINE] = _proc_names;
 
     return true;
 }

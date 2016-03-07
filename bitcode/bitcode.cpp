@@ -18,64 +18,56 @@
 /// @brief entry point
 int main()
 {
-    set_log_format(false, false, true);
+    set_log_format(false, false, false);
 
     BCConf _conf;
-    _conf.load_config(L"z:\\work.bob\\bob4-3-antivm\\bitbox\\bitcode\\bitcode.conf");
+    _conf.load_config(L"..\\bitcode\\bitcode.conf");
 
-    BCReg _reg_engine;
-    BCFile _file_engine;
-    BCSvc _svc_engine;
-    BCProcs _proc_engine;
-    
-    if (true != _svc_engine.initialize())
-    {
-        log_err "BCSvc::initialize() failed." log_end;
-        return -1;
-    }
+	std::list<IPBCConf> _iconf;
+	_iconf.push_back(new BCFile);
+	_iconf.push_back(new BCSvc);
+	_iconf.push_back(new BCProcs);
+	_iconf.push_back(new BCReg);
 
-    if (true != _proc_engine.initialize())
-    {
-        log_err "BCProc::initialize() failed." log_end;
-        return -1;
-    }
+	for (auto engine : _iconf)
+	{
+		if (true != engine->initialize())
+		{
+			log_err "initialize() failed." log_end;
+			return -1;
+		}
 
-    // check registries
-    for (auto reg_info : _conf._regs)
-    {
-        if (true == _reg_engine.is_exists(reg_info))
-        {
-            log_info "[found]" log_end;
-            reg_info.dump();
-        }
-    }
-
-    // file check
-    for (auto file_info : _conf._file_names)
-    {
-        if (true == _file_engine.is_file_exists(file_info.c_str()))
-        {
-            log_info "[found] file = %s", file_info.c_str() log_end;
-        }
-    }
-
-    // service check
-    for (auto svc_name : _conf._svc_names)
-    {
-        if (true == _svc_engine.is_svc_exists(svc_name.c_str()))
-        {
-            log_info "[found] service = %s", svc_name.c_str() log_end;
-        }
-    }
-
-    // process check
-    for (auto proc_name : _conf._proc_names)
-    {
-        if (true == _proc_engine.is_process_exists(proc_name.c_str()))
-        {
-            log_info "[found] process = %s is running", proc_name.c_str() log_end;
-        }
-    }
+		BCEngines engine_num = engine->get_engine_value();
+		if (engine_num == REG_ENGINE)
+		{
+			for (auto reg_info : _conf._regs)
+			{
+			    if (true == engine->is_exists(
+					reg_info._key_name.c_str(),
+					reg_info._val_name.c_str(),
+					reg_info._val_data.c_str()))
+			    {
+			        reg_info.dump();
+			    }
+			}
+		}
+		else
+		{
+			std::map<BCEngines, std::list<std::string>>::iterator it = _conf._conf_value.find(engine_num);
+			if (it == _conf._conf_value.end())
+			{
+				log_err "not found map." log_end;
+				return -1;
+			}
+			for (auto names : it->second)
+			{
+			    if (true == engine->is_exists(names.c_str()))
+			    {
+			        log_info "[Detected] = %s", names.c_str() log_end;
+			    }
+			}
+		}
+	}
 
     log_info "press any key to terminate..." log_end;
     _pause;

@@ -65,7 +65,7 @@ typedef bool (*fnproc_tree_callback)(_In_ process& process_info, _In_ DWORD_PTR 
 class cprocess_tree
 {
 public:
-	bool	clear_process_tree() { _proc_map.clear(); }
+	void	clear_process_tree() { _proc_map.clear(); }
 	bool	build_process_tree();
 
 	DWORD			find_process(_In_ const wchar_t* process_name);

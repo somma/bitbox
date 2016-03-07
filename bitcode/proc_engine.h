@@ -10,7 +10,7 @@
 #include "util.h"
 #include "process_tree.h"
 
-typedef class BCProcs
+typedef class BCProcs : public IBCConf
 {
 private:
     cprocess_tree   _proc_tree;
@@ -25,7 +25,7 @@ public:
     }
 
     /// @brief
-    bool initialize()
+	bool initialize()
     {
         // build process tree
         if (true != _proc_tree.build_process_tree())
@@ -39,21 +39,25 @@ public:
     }
 
     /// @brief
-    void finalize()
+	void finalize()
     {
         // free process tree
         _proc_tree.clear_process_tree();
     }
 
+	BCEngines get_engine_value() { return PROC_ENGINE; }
+
     /// @brief
-    bool is_process_exists(_In_ const char* proc_name)
+	bool is_exists(const char* values, ...)
     {
-        DWORD pid = _proc_tree.find_process(MbsToWcsEx(proc_name).c_str());
+		_ASSERTE(NULL != values);
+		if (NULL == values) return false;
+
+        DWORD pid = _proc_tree.find_process(MbsToWcsEx(values).c_str());
         if (0 != pid)
         {
             return true;
         }
-
         return false;
     }
 } *PBCProcs;

@@ -8,7 +8,7 @@
 #pragma once
 #include "conf.h"
 
-typedef class BCFile
+typedef class BCFile : public IBCConf
 {
 public:
     BCFile()
@@ -20,11 +20,15 @@ public:
     
     }
 
+	bool initialize() { return true; }
+	void finalize() { return; }
+	BCEngines get_engine_value() { return FILE_ENGINE; }
+
     /// @brief
-    bool is_file_exists(_In_ const char* file_path)
+	bool is_exists(const char* values, ...)
     {
-        _ASSERTE(NULL != file_path);
-        if (NULL == file_path) return false;
+        _ASSERTE(NULL != values);
+        if (NULL == values) return false;
 
         WIN32_FILE_ATTRIBUTE_DATA info = { 0 };
 
@@ -32,7 +36,7 @@ public:
         // CreateFile()이 아닌 GetFileAttributesEx()를 이용하면 파일이 다른 process에 의해 lock되어 있어도
         // 파일 존재여부를 정확히 체크할 수 있다.
         //
-        if (GetFileAttributesExA(file_path, GetFileExInfoStandard, &info) == 0)
+        if (GetFileAttributesExA(values, GetFileExInfoStandard, &info) == 0)
             return false;
         else
             return true;
