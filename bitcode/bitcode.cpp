@@ -29,6 +29,7 @@ int main()
     BCFile _file_engine;
     BCSvc _svc_engine;
     BCProcs _proc_engine;
+	BCWmi _wmi_engine;
     
     if (true != _svc_engine.initialize())
     {
@@ -41,6 +42,12 @@ int main()
         log_err "BCProc::initialize() failed." log_end;
         return -1;
     }
+
+	if (true != _wmi_engine.initialize())
+	{
+		log_err "BCWmi::initialize() failed." log_end;
+		return -1;
+	}
 
     // check registries
     for (auto reg_info : _conf._regs)
@@ -78,6 +85,11 @@ int main()
             log_info "[found] process = %s is running", proc_name.c_str() log_end;
         }
     }
+
+
+	// WMI check
+	
+
 
     log_info "press any key to terminate..." log_end;
     _pause;
