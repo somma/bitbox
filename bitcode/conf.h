@@ -11,6 +11,7 @@
 #include <sal.h>
 #include <string>
 #include <list>
+#include <map>
 #include "log.h"
 
 typedef class RegInfo
@@ -35,7 +36,7 @@ public:
     void dump()
     {
         log_info 
-            "root key = %s, key_name = %s, val_name = %s, val_data = %s", 
+            "[Detected] = Root_Key : %s, Sub_Key : %s, Val_Name : %s, Val_Data : %s", 
             _root_key.c_str(),
             _key_name.c_str(),
             _val_name.c_str(),
@@ -44,14 +45,21 @@ public:
     }
 } *PRegInfo;
 
+/*
+ * BitBox config/detect pattern class
+ */
 typedef class BCConf
 {
 public:
     bool load_config(_In_ const wchar_t* config_path);
 
+	std::list<RegInfo>			_regs;
+	std::map<BC_ENGINE_TYPE, std::list<std::string>> _conf_value;
+
+private:
     std::list<std::string>      _file_names;
-    std::list<RegInfo>          _regs;
     std::list<std::string>      _svc_names;
     std::list<std::string>      _proc_names;
 
 } *PBCConf;
+

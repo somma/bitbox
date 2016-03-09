@@ -10,7 +10,7 @@
 #include "conf.h"
 
 
-typedef class BCSvc
+typedef class BCSvc : public IBCEngine
 {
 private:
     SC_HANDLE _scm_handle;
@@ -39,7 +39,7 @@ public:
     }
 
     /// @brief 
-    void finalize()
+	void finalize()
     {
         if (NULL != _scm_handle)
         {
@@ -47,8 +47,10 @@ public:
         }
     }
 
+	BC_ENGINE_TYPE get_engine_type() { return SVC_ENGINE; }
+
     /// @brief
-    bool is_svc_exists(_In_ const char* svc_name)
+	bool is_exists(const char* values, ...)
     {
         _ASSERTE(NULL != _scm_handle);
         if (NULL == _scm_handle)
@@ -57,8 +59,8 @@ public:
             return false;
         }
 
-        _ASSERTE(NULL != svc_name);
-        if (NULL == svc_name) return false;
+        _ASSERTE(NULL != values);
+        if (NULL == values) return false;
 
         bool ret = false;
         SC_HANDLE service_handle = NULL;
@@ -66,7 +68,7 @@ public:
         do
         {   
             // already exists?
-            service_handle = OpenServiceA(_scm_handle, svc_name, SERVICE_QUERY_CONFIG);
+            service_handle = OpenServiceA(_scm_handle, values, SERVICE_QUERY_CONFIG);
             if (NULL != service_handle)
             {
                 ret = true; // found
