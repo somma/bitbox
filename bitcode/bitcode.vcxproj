@@ -164,6 +164,7 @@
     <ClInclude Include="targetver.h" />
     <ClInclude Include="util.h" />
     <ClInclude Include="wmi_engine.h" />
+    <ClInclude Include="wnd_engine.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="bitcode.cpp" />
