@@ -80,4 +80,10 @@ public:
         CloseServiceHandle(service_handle);
         return ret;
     };
+
+	void dump(const char* values)
+	{
+		log_info "[Detected Service] = %s", values log_end;
+	}
+
 } *PBCSvc;

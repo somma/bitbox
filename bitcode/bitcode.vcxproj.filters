@@ -69,6 +69,12 @@
     <ClInclude Include="driver_engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="mac_addr_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MacUtil.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

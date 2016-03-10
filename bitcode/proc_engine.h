@@ -60,4 +60,10 @@ public:
         }
         return false;
     }
+
+	void dump(const char* values)
+	{
+		log_info "[Detected Process] = %s", values log_end;
+	}
+
 } *PBCProcs;

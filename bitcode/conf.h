@@ -36,7 +36,7 @@ public:
     void dump()
     {
         log_info 
-            "[Detected] = Root_Key : %s, Sub_Key : %s, Val_Name : %s, Val_Data : %s", 
+            "[Detected Registry] = Root_Key : %s, Sub_Key : %s, Val_Name : %s, Val_Data : %s", 
             _root_key.c_str(),
             _key_name.c_str(),
             _val_name.c_str(),

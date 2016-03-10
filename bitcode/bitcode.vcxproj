@@ -156,6 +156,8 @@
     <ClInclude Include="jsoncpp\json\json-forwards.h" />
     <ClInclude Include="jsoncpp\json\json.h" />
     <ClInclude Include="log.h" />
+    <ClInclude Include="MacUtil.h" />
+    <ClInclude Include="mac_addr_engine.h" />
     <ClInclude Include="process_tree.h" />
     <ClInclude Include="proc_engine.h" />
     <ClInclude Include="RegistryUtil.h" />

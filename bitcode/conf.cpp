@@ -82,5 +82,14 @@ bool BCConf::load_config(const wchar_t * config_path)
 	_conf_value[DRIVER_ENGINE] = _conf_list;
 	_conf_list.clear();
 
+	// read network_adapters_address
+	Json::Value mac_address_names = conf["network_adapter_addr"];
+	for (auto mac_address_name : mac_address_names)
+	{
+		_conf_list.push_back(mac_address_name.asString());
+	}
+	_conf_value[MAC_ENGINE] = _conf_list;
+	_conf_list.clear();
+
     return true;
 }
