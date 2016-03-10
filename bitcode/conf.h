@@ -57,9 +57,7 @@ public:
 	std::map<BC_ENGINE_TYPE, std::list<std::string>> _conf_value;
 
 private:
-    std::list<std::string>      _file_names;
-    std::list<std::string>      _svc_names;
-    std::list<std::string>      _proc_names;
+    std::list<std::string>      _conf_list;
 
 } *PBCConf;
 
