@@ -10,7 +10,6 @@
 #include "conf.h"
 #include "RegistryUtil.h"
 
-
 typedef class BCReg : public IBCEngine
 {
 private:
@@ -55,4 +54,10 @@ public:
 
 		return false;
 	}
+
+	void dump(const char* values)
+	{
+		log_info "[Detected Registry] = %s", values log_end;
+	}
+
 } *PBCReg;

@@ -7,7 +7,6 @@
  * @copyright All rights reserved by Yonghwan, Noh.
 **/
 #include "stdafx.h"
-#include "log.h"
 #include "conf.h"
 #include "util.h"
 #include "reg_engine.h"
@@ -15,6 +14,7 @@
 #include "svc_engine.h"
 #include "proc_engine.h"
 #include "driver_engine.h"
+#include "mac_addr_engine.h"
 
 /// @brief entry point
 int main()
@@ -30,6 +30,7 @@ int main()
 	_engines.push_back(new BCProcs);
 	_engines.push_back(new BCReg);
 	_engines.push_back(new BCDriver);
+	_engines.push_back(new BCMac);
 
 	for (auto engine : _engines)
 	{
@@ -65,7 +66,7 @@ int main()
 			{
 			    if (true == engine->is_exists(names.c_str()))
 			    {
-			        log_info "[Detected] = %s", names.c_str() log_end;
+					engine->dump(names.c_str());
 			    }
 			}
 		}

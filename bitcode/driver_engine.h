@@ -48,5 +48,11 @@ public:
 
 		return false;
 	}
+
+	void dump(const char* values)
+	{
+		log_info "[Detected Driver] = %s", values log_end;
+	}
+
 } *PBCDriver;
 

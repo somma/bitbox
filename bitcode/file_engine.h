@@ -42,6 +42,11 @@ public:
             return true;
     }
 
+	void dump(const char* values)
+	{
+		log_info "[Detected File] = %s", values log_end;
+	}
+
 private:
 
 
