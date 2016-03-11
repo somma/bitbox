@@ -37,7 +37,8 @@ enum BC_ENGINE_TYPE
     FILE_ENGINE = 0,
     PROC_ENGINE = 1,
     SVC_ENGINE  = 2,
-    REG_ENGINE  = 3
+    REG_ENGINE  = 3,
+	DRIVER_ENGINE = 4
 };
 
 

@@ -14,6 +14,7 @@
 #include "file_engine.h"
 #include "svc_engine.h"
 #include "proc_engine.h"
+#include "driver_engine.h"
 
 /// @brief entry point
 int main()
@@ -28,6 +29,7 @@ int main()
 	_engines.push_back(new BCSvc);
 	_engines.push_back(new BCProcs);
 	_engines.push_back(new BCReg);
+	_engines.push_back(new BCDriver);
 
 	for (auto engine : _engines)
 	{
@@ -37,8 +39,8 @@ int main()
 			return -1;
 		}
 
-        BC_ENGINE_TYPE engine_num = engine->get_engine_type();
-		if (engine_num == REG_ENGINE)
+        BC_ENGINE_TYPE engine_type = engine->get_engine_type();
+		if (engine_type == REG_ENGINE)
 		{
 			for (auto reg_info : _conf._regs)
 			{
@@ -53,7 +55,7 @@ int main()
 		}
 		else
 		{
-			std::map<BC_ENGINE_TYPE, std::list<std::string>>::iterator it = _conf._conf_value.find(engine_num);
+			std::map<BC_ENGINE_TYPE, std::list<std::string>>::iterator it = _conf._conf_value.find(engine_type);
 			if (it == _conf._conf_value.end())
 			{
 				log_err "not found map." log_end;

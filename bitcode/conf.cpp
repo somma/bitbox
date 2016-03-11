@@ -38,8 +38,10 @@ bool BCConf::load_config(const wchar_t * config_path)
     Json::Value file_names = conf["file_name"];
     for (auto file_name : file_names)
     {
-        _file_names.push_back(file_name.asString());
+		_conf_list.push_back(file_name.asString());
     }
+	_conf_value[FILE_ENGINE] = _conf_list;
+	_conf_list.clear();
 
     // read registry
     Json::Value reg_keys = conf["reg_key"];
@@ -57,19 +59,28 @@ bool BCConf::load_config(const wchar_t * config_path)
     Json::Value svc_names = conf["svc_name"];
     for (auto svc_name : svc_names)
     {
-        _svc_names.push_back(svc_name.asString());
+		_conf_list.push_back(svc_name.asString());
     }
+	_conf_value[SVC_ENGINE] = _conf_list;
+	_conf_list.clear();
 
     // read process names
     Json::Value proc_names = conf["process_name"];
     for (auto proc_name : proc_names)
     {
-        _proc_names.push_back(proc_name.asString());
+		_conf_list.push_back(proc_name.asString());
     }
+	_conf_value[PROC_ENGINE] = _conf_list;
+	_conf_list.clear();
 
-	_conf_value[FILE_ENGINE] = _file_names;
-	_conf_value[SVC_ENGINE] = _svc_names;
-	_conf_value[PROC_ENGINE] = _proc_names;
+	// read driver names
+	Json::Value driver_names = conf["driver_name"];
+	for (auto driver_name : driver_names)
+	{
+		_conf_list.push_back(driver_name.asString());
+	}
+	_conf_value[DRIVER_ENGINE] = _conf_list;
+	_conf_list.clear();
 
     return true;
 }
