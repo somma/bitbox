@@ -17,6 +17,7 @@
 #include <intsafe.h>
 #include <stdint.h>
 #include <crtdbg.h>
+#include <psapi.h>
 
 /**
  * @Purpose Using WMI Provider lib

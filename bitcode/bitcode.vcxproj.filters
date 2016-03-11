@@ -66,6 +66,9 @@
     <ClInclude Include="wnd_engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dll_engine.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
