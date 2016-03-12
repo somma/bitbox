@@ -7,12 +7,15 @@ typedef class BCdll
 private:
 	DWORD pid;
 	HANDLE hProcess;
+	HMODULE hMods[1024];
+	DWORD cbNeeded;
 
 public:
 	BCdll() 
 	{
 		pid = NULL;
 		hProcess = NULL;
+		cbNeeded = NULL;
 	};
 	virtual ~BCdll() 
 	{
@@ -39,6 +42,11 @@ public:
 			return false;
 		}
 
+		if (!EnumProcessModules(hProcess, hMods, sizeof(hMods), &cbNeeded) ) {
+			log_err "EnumProcessModules() failed. gle = %u ", GetLastError() log_end;
+			return false;
+		}
+
 		return true;
 	};
 
@@ -49,30 +57,23 @@ public:
 
 	bool is_exists(const char* values, ...)
 	{
-		HMODULE hMods[1024];
-		DWORD cbNeeded;
 		unsigned int i;
-
 		wchar_t *val = MbsToWcs(values);
-		
+		TCHAR szModName[MAX_PATH];
 
-		if ( EnumProcessModules(hProcess, hMods, sizeof(hMods), &cbNeeded) ) 
+		for (i = 0; i < (cbNeeded / sizeof(HMODULE)); i++)
 		{
-
-			for (i = 0; i < (cbNeeded / sizeof(HMODULE)); i++)
+			
+			if (GetModuleFileNameEx(hProcess, hMods[i], szModName, sizeof(szModName) / sizeof(TCHAR)))
 			{
-				TCHAR szModName[MAX_PATH];
-
-				if (GetModuleFileNameEx(hProcess, hMods[i], szModName, sizeof(szModName) / sizeof(TCHAR)))
+				if (wcsstr(szModName, val) != NULL)
 				{
-					if (wcsstr(szModName, val) != NULL) 
-					{
-						return true;
-					}
+					return true;
 				}
 			}
 
+
 		}
 		return false;
-	}; 
+	};
 };
