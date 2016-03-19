@@ -152,6 +152,7 @@
   <ItemGroup>
     <ClInclude Include="conf.h" />
     <ClInclude Include="driver_engine.h" />
+    <ClInclude Include="dll_engine.h" />
     <ClInclude Include="file_engine.h" />
     <ClInclude Include="jsoncpp\json\json-forwards.h" />
     <ClInclude Include="jsoncpp\json\json.h" />

@@ -13,6 +13,7 @@
 #include "file_engine.h"
 #include "svc_engine.h"
 #include "proc_engine.h"
+#include "dll_engine.h"
 #include "driver_engine.h"
 #include "mac_addr_engine.h"
 
