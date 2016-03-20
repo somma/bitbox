@@ -44,7 +44,8 @@ enum BC_ENGINE_TYPE
     SVC_ENGINE  = 2,
     REG_ENGINE  = 3,
 	DRIVER_ENGINE = 4,
-	MAC_ENGINE = 5
+	MAC_ENGINE = 5,
+	CPU_ENGINE = 6
 };
 
 

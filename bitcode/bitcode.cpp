@@ -15,6 +15,7 @@
 #include "proc_engine.h"
 #include "driver_engine.h"
 #include "mac_addr_engine.h"
+#include "cpu_check_engine.h"
 
 /// @brief entry point
 int main()
@@ -54,6 +55,7 @@ int main()
 			    }
 			}
 		}
+
 		else
 		{
 			std::map<BC_ENGINE_TYPE, std::list<std::string>>::iterator it = _conf._conf_value.find(engine_type);
