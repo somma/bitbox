@@ -32,6 +32,7 @@ int main()
 	_engines.push_back(new BCReg);
 	_engines.push_back(new BCDriver);
 	_engines.push_back(new BCMac);
+	_engines.push_back(new BCcpu);
 
 	for (auto engine : _engines)
 	{

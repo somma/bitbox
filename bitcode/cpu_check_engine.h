@@ -7,7 +7,6 @@
 **/
 #pragma once
 #include "conf.h"
-#include "stdafx.h"
 #include <intrin.h>
 
 typedef class BCcpu : public IBCEngine
