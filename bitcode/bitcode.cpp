@@ -16,6 +16,7 @@
 #include "dll_engine.h"
 #include "driver_engine.h"
 #include "mac_addr_engine.h"
+#include "device_engine.h"
 
 /// @brief entry point
 int main()
@@ -32,6 +33,7 @@ int main()
 	_engines.push_back(new BCReg);
 	_engines.push_back(new BCDriver);
 	_engines.push_back(new BCMac);
+	_engines.push_back(new BCDevice);
 
 	for (auto engine : _engines)
 	{

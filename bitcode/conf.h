@@ -45,6 +45,29 @@ public:
     }
 } *PRegInfo;
 
+typedef class DeviceInfo
+{
+public:
+	DeviceInfo(_In_ const char* root_key,
+		_In_ const char* key_name)
+		: _root_key(root_key),
+		_key_name(key_name)
+	{
+	}
+
+	std::string _root_key;
+	std::string _key_name;
+
+	void dump()
+	{
+		log_info
+			"[Detected Device] = Root_Key : %s, Sub_Key : %s, Val_Name : %s",
+			_root_key.c_str(),
+			_key_name.c_str()
+			log_end
+	}
+} *PDeviceInfo;
+
 /*
  * BitBox config/detect pattern class
  */

@@ -91,5 +91,13 @@ bool BCConf::load_config(const wchar_t * config_path)
 	_conf_value[MAC_ENGINE] = _conf_list;
 	_conf_list.clear();
 
+	Json::Value device_names = conf["device"];
+	for (auto device : device_names)
+	{
+		_conf_list.push_back(device.asString());
+	}
+	_conf_value[DEVICE_ENGINE] = _conf_list;
+	_conf_list.clear();
+
     return true;
 }
